@@ -7,3 +7,6 @@ contracts/flattened/*.sol
 
 .env
 .env.dev
+
+compiled
+compiled/
