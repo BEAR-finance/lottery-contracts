@@ -11,16 +11,16 @@ contract LotteryRewardProxy {
     using SafeERC20 for IERC20;
 
     Lottery public lottery;
-    IERC20 public cake;
+    IERC20 public pbear;
     address public adminAddress;
 
     constructor(
         Lottery _lottery,
-        IERC20 _cake,
+        IERC20 _pbear,
         address _admin
     ) public {
         lottery = _lottery;
-        cake = _cake;
+        pbear = _pbear;
         adminAddress = _admin;
     }
 
@@ -35,13 +35,13 @@ contract LotteryRewardProxy {
     }
 
     function inject(uint256 _amount) external onlyAdmin {
-        cake.safeApprove(address(lottery), _amount);
+        pbear.safeApprove(address(lottery), _amount);
         lottery.buy(_amount, nullTicket);
         emit Inject(_amount);
     }
 
     function adminWithdraw(uint256 _amount) external onlyAdmin {
-        cake.safeTransfer(address(msg.sender), _amount);
+        pbear.safeTransfer(address(msg.sender), _amount);
         emit Withdraw(_amount);
     }
 
